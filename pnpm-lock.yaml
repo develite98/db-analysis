@@ -25,6 +25,9 @@ dependencies:
   '@angular/router':
     specifier: ~17.3.0
     version: 17.3.7(@angular/common@17.3.7)(@angular/core@17.3.7)(@angular/platform-browser@17.3.7)(rxjs@7.8.1)
+  '@ngneat/helipopper':
+    specifier: ^9.2.1
+    version: 9.2.1(@angular/core@17.3.7)
   '@ngrx/component-store':
     specifier: ^17.2.0
     version: 17.2.0(@angular/core@17.3.7)(rxjs@7.8.1)
@@ -40,6 +43,9 @@ dependencies:
   '@tailwindcss/typography':
     specifier: ^0.5.13
     version: 0.5.13(tailwindcss@3.4.3)
+  remeda:
+    specifier: ^1.61.0
+    version: 1.61.0
   rxjs:
     specifier: ~7.8.0
     version: 7.8.1
@@ -3602,6 +3608,26 @@ packages:
     dependencies:
       call-bind: 1.0.7
 
+  /@ngneat/helipopper@9.2.1(@angular/core@17.3.7):
+    resolution: {integrity: sha512-rpScDAcbbRimJqaHLwlHQM09ey+gVfxRtfHgtEw6ADRLzgC6VpV50Wk8vQRwdXugyLFuoVe46Vn8kxtUSuyIDA==}
+    peerDependencies:
+      '@angular/core': '>=17.0.0'
+    dependencies:
+      '@angular/core': 17.3.7(rxjs@7.8.1)(zone.js@0.14.5)
+      '@ngneat/overview': 6.0.0(@angular/core@17.3.7)
+      tippy.js: 6.3.7
+      tslib: 2.6.2
+    dev: false
+
+  /@ngneat/overview@6.0.0(@angular/core@17.3.7):
+    resolution: {integrity: sha512-pm4bAEYtnUl8q82dwjh5NN9HF0WTFEI58VtR12izp9Oaa2dtseX82VUArfb4fadmlbHpPMUwXHrsm0ORyWii2A==}
+    peerDependencies:
+      '@angular/core': '>=17'
+    dependencies:
+      '@angular/core': 17.3.7(rxjs@7.8.1)(zone.js@0.14.5)
+      tslib: 2.6.2
+    dev: false
+
   /@ngrx/component-store@17.2.0(@angular/core@17.3.7)(rxjs@7.8.1):
     resolution: {integrity: sha512-ywhyoZpkbVIY1t5zf7xfWLGkY0A/fQdMjPehHloDI6bRLrmbllBhQRazwZ+FAGIi2myx1+mGcmAc6FbtIikedA==}
     peerDependencies:
@@ -4382,6 +4408,10 @@ packages:
     engines: {node: '>=14'}
     requiresBuild: true
     optional: true
+
+  /@popperjs/core@2.11.8:
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+    dev: false
 
   /@rollup/rollup-android-arm-eabi@4.17.2:
     resolution: {integrity: sha512-NM0jFxY8bB8QLkoKxIQeObCaDlJKewVlIEkuyYKm5An1tdVZ966w2+MPQ2l8LBZLjR+SgyV+nRkTIunzOYBMLQ==}
@@ -10253,6 +10283,10 @@ packages:
     dependencies:
       jsesc: 0.5.0
 
+  /remeda@1.61.0:
+    resolution: {integrity: sha512-caKfSz9rDeSKBQQnlJnVW3mbVdFgxgGWQKq1XlFokqjf+hQD5gxutLGTTY2A/x24UxVyJe9gH5fAkFI63ULw4A==}
+    dev: false
+
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -11087,6 +11121,12 @@ packages:
 
   /thunky@1.1.0:
     resolution: {integrity: sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==}
+
+  /tippy.js@6.3.7:
+    resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+    dependencies:
+      '@popperjs/core': 2.11.8
+    dev: false
 
   /tmp@0.0.33:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
