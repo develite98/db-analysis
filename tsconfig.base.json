@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ng-lab/core": ["libs/core/src/index.ts"],
+      "@ng-lab/ui-controls": ["libs/ui-controls/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
