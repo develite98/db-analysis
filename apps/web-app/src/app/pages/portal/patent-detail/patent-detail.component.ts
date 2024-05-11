@@ -25,7 +25,7 @@ export class PatentDetailComponent extends BaseComponent implements OnInit {
   public patent = signal<Patent | undefined>(undefined);
 
   ngOnInit() {
-    const patentCode = this.activeRoute.snapshot.params['patentCode'];
+    const patentCode = this.activeRoute.snapshot.queryParams['patentCode'];
     if (!patentCode) return;
 
     this.patentApi

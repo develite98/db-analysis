@@ -23,7 +23,7 @@ export const PORTAL_ROUTES: Routes = [
               ),
           },
           {
-            path: ':patentCode',
+            path: 'detail',
             data: {
               name: 'Chi tiết',
             },

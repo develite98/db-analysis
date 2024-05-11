@@ -1,5 +1,11 @@
 import { DatePipe, JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+  input,
+} from '@angular/core';
 import { Patent } from '@ng-lab/core';
 
 @Component({
@@ -12,4 +18,6 @@ import { Patent } from '@ng-lab/core';
 export class PatentCardComponent {
   public patent = input.required<Patent>();
   public no = input(1);
+
+  @Output() public titleClick = new EventEmitter();
 }

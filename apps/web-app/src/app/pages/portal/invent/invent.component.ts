@@ -36,8 +36,9 @@ export class InventComponent {
   public activeRoute = inject(ActivatedRoute);
 
   public goDetail(patent: Patent) {
-    this.router.navigate([patent.patentCode], {
+    this.router.navigate(['detail'], {
       relativeTo: this.activeRoute.parent,
+      queryParams: { patentCode: patent.patentCode },
     });
   }
 }

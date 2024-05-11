@@ -115,7 +115,7 @@
         <div class="skeleton h-4 w-1/5"></div>
         } @if (patentStore.isSuccess()) { @for (item of patentStore.data();
         track item; let i = $index) {
-        <app-patent-card [patent]="item" [no]="i + 1" (click)="goDetail(item)"></app-patent-card>
+        <app-patent-card [patent]="item" [no]="i + 1" (titleClick)="goDetail(item)"></app-patent-card>
         } }
       </div>
 
