@@ -106,6 +106,10 @@ export class PortalLayoutComponent {
       });
   }
 
+  public logout() {
+    this.router.navigateByUrl('/login');
+  }
+
   private _getBreadcrumbs(
     route: ActivatedRoute,
     url = '',

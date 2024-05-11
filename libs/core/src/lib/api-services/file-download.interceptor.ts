@@ -8,7 +8,6 @@ import { tap } from 'rxjs/operators';
 export const downloadFileInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     tap((event: HttpEvent<any>) => {
-      console.log(123);
       if (event instanceof HttpResponse) {
         const contentType = event.headers.get('content-type');
         if (contentType === 'application/vnd.ms-excel') {
@@ -25,6 +24,7 @@ const downloadFile = (response: HttpResponse<any>) => {
     const filenameMatch = contentDispositionHeader.match(
       /filename="?([^"]+)"?$/
     );
+
     const filename = filenameMatch ? filenameMatch[1] : 'file.xls';
 
     const blob = new Blob([response.body], {
