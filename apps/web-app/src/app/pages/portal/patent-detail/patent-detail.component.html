@@ -1,0 +1,136 @@
+<div class="px-primary max-w-screen-xl mx-auto">
+  <div class="px-primary border shadow rounded-box mt-6 pt-4">
+    <div class="mb-4">
+    <span class="flex gap-2 items-center text-xl" (click)="goBack()">
+        <span class="app-icon">keyboard_return</span>
+        <a class="link link-hover">Trở lại</a>
+      </span>
+    </div>
+    <div class="px-4 sm:px-0">
+      @if (isLoading()) {
+      <div class="skeleton h-8 w-96 rounded-lg"></div>
+
+      } @else {
+      <div class="flex justify-between">
+        <div>
+          <h3 class="font-semibold leading-7 text-base-content text-2xl">
+            {{ patent()?.patentName }}
+          </h3>
+
+          <p class="mt-1 max-w-2xl text-base leading-6 text-base-content/70">
+            Chi tiết và thông tin.
+          </p>
+        </div>
+        <div>
+          <button class="btn btn-primary" (click)="export()">
+            <span class="app-icon"> download </span>
+
+            Export
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="mt-6 border-t border-base-content/10">
+      <dl class="divide-y divide-base-content/10">
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Title</dt>
+          <dd
+            class="mt-1 text-sm leading-6 text-base-content/90 sm:col-span-2 sm:mt-0"
+          >
+            @if (isLoading()) {
+            <div class="skeleton h-8 w-96 rounded-lg"></div>
+            } @else {
+            {{ patent()?.title }}
+            }
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">
+            Patent Code
+          </dt>
+          <dd
+            class="mt-1 text-sm leading-6 text-base-content/90 sm:col-span-2 sm:mt-0"
+          >
+            @if (isLoading()) {
+            <div class="skeleton h-8 w-96 rounded-lg"></div>
+            } @else {
+            {{ patent()?.patentCode }}
+            }
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Patent No</dt>
+          <dd
+            class="mt-1 text-sm leading-6 text-base-content/90 sm:col-span-2 sm:mt-0"
+          >
+            @if (isLoading()) {
+            <div class="skeleton h-8 w-96 rounded-lg"></div>
+            } @else {
+            {{ patent()?.patentNo }}
+            }
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Info</dt>
+          <dd
+            class="mt-1 text-sm leading-6 text-base-content/90 sm:col-span-2 sm:mt-0"
+          >
+            @if (isLoading()) {
+            <div class="skeleton h-8 w-96 rounded-lg"></div>
+            } @else {
+            <div class="flex items-center w-fit gap-2 mb-1 -ms-px text-sm">
+              <span class="px-3 py-1 rounded-box bg-success/20"
+                ><span class="font-medium">Appl.No:</span>
+                {{ patent()?.applicantNo }}</span
+              >
+              <span class="px-3 py-1 rounded-box bg-info/20"
+                ><span class="font-medium">Inventor:</span>
+                {{ patent()?.inventorName }}</span
+              >
+            </div>
+            }
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">
+            Description
+          </dt>
+          <dd
+            class="mt-1 text-sm leading-6 text-base-content/90 sm:col-span-2 sm:mt-0 max-h-64 overflow-auto"
+          >
+            @if (isLoading()) {
+            <div class="skeleton h-20 w-96 rounded-lg"></div>
+            } @else {
+            {{ patent()?.description }}
+            }
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Claims</dt>
+          <dd
+            class="mt-1 text-sm leading-6 text-base-content/90 sm:col-span-2 sm:mt-0 max-h-64 overflow-auto"
+          >
+            @if (isLoading()) {
+            <div class="skeleton h-20 w-96 rounded-lg"></div>
+            } @else {
+            {{ patent()?.claims }}
+            }
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Summary</dt>
+          <dd
+            class="mt-1 text-sm leading-6 text-base-content/90 sm:col-span-2 sm:mt-0 max-h-64 overflow-auto"
+          >
+            @if (isLoading()) {
+            <div class="skeleton h-20 w-96 rounded-lg"></div>
+            } @else {
+            {{ patent()?.summary }}
+            }
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>

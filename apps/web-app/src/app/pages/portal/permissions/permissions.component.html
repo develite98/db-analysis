@@ -1,0 +1,390 @@
+<div class="grow flex flex-col overflow-auto pt-2">
+    <lib-page-header
+      [title]="'Phân quyền'"
+      [description]="'Hệ thống phân quyền người dùng...'"
+    >
+      <button class="btn btn-xs sm:btn-sm md:btn-md btn-primary">
+        <span class="app-icon">add</span>
+        Thêm permission
+      </button>
+  
+      <button class="btn btn-xs sm:btn-sm md:btn-md btn-outline btn-error">
+        <span class="app-icon">delete</span>
+        Xóa
+      </button>
+    </lib-page-header>
+  
+    <div class="grow overflow-auto">
+      <div class="mt-6 flow-root">
+        <lib-filters></lib-filters>
+        <div class="overflow-x-auto w-full">
+          <div class="inline-block min-w-full py-2 align-middle">
+            <table class="min-w-full divide-y divide-base-content/20">
+              <thead>
+                <tr>
+                  <th
+                    scope="col"
+                    class="py-3.5 pl-8 pr-3 text-left text-sm font-semibold text-base-content"
+                  >
+                    Name
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-3 py-3.5 text-left text-sm font-semibold text-base-content"
+                  >
+                    Title
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-3 py-3.5 text-left text-sm font-semibold text-base-content"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-3 py-3.5 text-left text-sm font-semibold text-base-content"
+                  >
+                    Role
+                  </th>
+                  <th scope="col" class="relative py-3.5 pl-3 pr-4 pr-16">
+                    <span class="sr-only">Edit</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-base-content/10 bg-base-100">
+                <tr>
+                  <td class="whitespace-nowrap py-5 pl-8 pr-3 text-sm">
+                    <div class="flex items-center">
+                      <div class="h-11 w-11 flex-shrink-0">
+                        <img
+                          class="h-11 w-11 rounded-full"
+                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      </div>
+                      <div class="ml-4">
+                        <div class="font-medium text-base-content">
+                          Lindsay Walton
+                        </div>
+                        <div class="mt-1 text-base-content/70">
+                          lindsay.waltonexample.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <div class="text-base-content">Front-end Developer</div>
+                    <div class="mt-1 text-base-content/70">Optimization</div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <span
+                      class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+                      >Active</span
+                    >
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    Member
+                  </td>
+                  <td
+                    class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium pr-16"
+                  >
+                    <a href="#" class="text-primary"
+                      >Edit<span class="sr-only">, Lindsay Walton</span></a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="whitespace-nowrap py-5 pl-8 pr-3 text-sm">
+                    <div class="flex items-center">
+                      <div class="h-11 w-11 flex-shrink-0">
+                        <img
+                          class="h-11 w-11 rounded-full"
+                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      </div>
+                      <div class="ml-4">
+                        <div class="font-medium text-base-content">
+                          Lindsay Walton
+                        </div>
+                        <div class="mt-1 text-base-content/70">
+                          lindsay.waltonexample.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <div class="text-base-content">Front-end Developer</div>
+                    <div class="mt-1 text-base-content/70">Optimization</div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <span
+                      class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+                      >Active</span
+                    >
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    Member
+                  </td>
+                  <td
+                    class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium pr-16"
+                  >
+                    <a href="#" class="text-primary"
+                      >Edit<span class="sr-only">, Lindsay Walton</span></a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="whitespace-nowrap py-5 pl-8 pr-3 text-sm">
+                    <div class="flex items-center">
+                      <div class="h-11 w-11 flex-shrink-0">
+                        <img
+                          class="h-11 w-11 rounded-full"
+                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      </div>
+                      <div class="ml-4">
+                        <div class="font-medium text-base-content">
+                          Lindsay Walton
+                        </div>
+                        <div class="mt-1 text-base-content/70">
+                          lindsay.waltonexample.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <div class="text-base-content">Front-end Developer</div>
+                    <div class="mt-1 text-base-content/70">Optimization</div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <span
+                      class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+                      >Active</span
+                    >
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    Member
+                  </td>
+                  <td
+                    class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium pr-16"
+                  >
+                    <a href="#" class="text-primary"
+                      >Edit<span class="sr-only">, Lindsay Walton</span></a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="whitespace-nowrap py-5 pl-8 pr-3 text-sm">
+                    <div class="flex items-center">
+                      <div class="h-11 w-11 flex-shrink-0">
+                        <img
+                          class="h-11 w-11 rounded-full"
+                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      </div>
+                      <div class="ml-4">
+                        <div class="font-medium text-base-content">
+                          Lindsay Walton
+                        </div>
+                        <div class="mt-1 text-base-content/70">
+                          lindsay.waltonexample.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <div class="text-base-content">Front-end Developer</div>
+                    <div class="mt-1 text-base-content/70">Optimization</div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <span
+                      class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+                      >Active</span
+                    >
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    Member
+                  </td>
+                  <td
+                    class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium pr-16"
+                  >
+                    <a href="#" class="text-primary"
+                      >Edit<span class="sr-only">, Lindsay Walton</span></a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="whitespace-nowrap py-5 pl-8 pr-3 text-sm">
+                    <div class="flex items-center">
+                      <div class="h-11 w-11 flex-shrink-0">
+                        <img
+                          class="h-11 w-11 rounded-full"
+                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      </div>
+                      <div class="ml-4">
+                        <div class="font-medium text-base-content">
+                          Lindsay Walton
+                        </div>
+                        <div class="mt-1 text-base-content/70">
+                          lindsay.waltonexample.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <div class="text-base-content">Front-end Developer</div>
+                    <div class="mt-1 text-base-content/70">Optimization</div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <span
+                      class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+                      >Active</span
+                    >
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    Member
+                  </td>
+                  <td
+                    class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium pr-16"
+                  >
+                    <a href="#" class="text-primary"
+                      >Edit<span class="sr-only">, Lindsay Walton</span></a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="whitespace-nowrap py-5 pl-8 pr-3 text-sm">
+                    <div class="flex items-center">
+                      <div class="h-11 w-11 flex-shrink-0">
+                        <img
+                          class="h-11 w-11 rounded-full"
+                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      </div>
+                      <div class="ml-4">
+                        <div class="font-medium text-base-content">
+                          Lindsay Walton
+                        </div>
+                        <div class="mt-1 text-base-content/70">
+                          lindsay.waltonexample.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <div class="text-base-content">Front-end Developer</div>
+                    <div class="mt-1 text-base-content/70">Optimization</div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <span
+                      class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+                      >Active</span
+                    >
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    Member
+                  </td>
+                  <td
+                    class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium pr-16"
+                  >
+                    <a href="#" class="text-primary"
+                      >Edit<span class="sr-only">, Lindsay Walton</span></a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="whitespace-nowrap py-5 pl-8 pr-3 text-sm">
+                    <div class="flex items-center">
+                      <div class="h-11 w-11 flex-shrink-0">
+                        <img
+                          class="h-11 w-11 rounded-full"
+                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      </div>
+                      <div class="ml-4">
+                        <div class="font-medium text-base-content">
+                          Lindsay Walton
+                        </div>
+                        <div class="mt-1 text-base-content/70">
+                          lindsay.waltonexample.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <div class="text-base-content">Front-end Developer</div>
+                    <div class="mt-1 text-base-content/70">Optimization</div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <span
+                      class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+                      >Active</span
+                    >
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    Member
+                  </td>
+                  <td
+                    class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium pr-16"
+                  >
+                    <a href="#" class="text-primary"
+                      >Edit<span class="sr-only">, Lindsay Walton</span></a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="whitespace-nowrap py-5 pl-8 pr-3 text-sm">
+                    <div class="flex items-center">
+                      <div class="h-11 w-11 flex-shrink-0">
+                        <img
+                          class="h-11 w-11 rounded-full"
+                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      </div>
+                      <div class="ml-4">
+                        <div class="font-medium text-base-content">
+                          Lindsay Walton
+                        </div>
+                        <div class="mt-1 text-base-content/70">
+                          lindsay.waltonexample.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <div class="text-base-content">Front-end Developer</div>
+                    <div class="mt-1 text-base-content/70">Optimization</div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    <span
+                      class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+                      >Active</span
+                    >
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-base-content/70">
+                    Member
+                  </td>
+                  <td
+                    class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium pr-16"
+                  >
+                    <a href="#" class="text-primary"
+                      >Edit<span class="sr-only">, Lindsay Walton</span></a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

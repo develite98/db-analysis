@@ -1,0 +1,36 @@
+<div class="flex items-center gap-2 h-full">
+  <span class="text-lg font-medium">
+    Tổng số trang: {{ pagingInfo()?.totalPages || 0 }}</span
+  >
+
+  <div class="h-6 w-px bg-base-content/20 me-4 ms-4"></div>
+
+  <div class="flex items-center gap-2">
+    <span class="text-lg font-medium"> Kích thước trang: </span>
+    <button
+      class="input input-bordered join-item !outline-none truncate flex items-center gap-2"
+    >
+      <!-- #tooltip="tippy" -->
+      <!-- [tp]="selectTpl" -->
+      <!-- (click)="$event.preventDefault(); tooltip.show()" -->
+      <!-- [tpOffset]="[-5, -5]"
+      [tpUseHostWidth]="true"
+      tpVariation="popper"
+      tpPlacement="bottom" -->
+      <span class="truncate"> {{ pagingInfo()?.size }} </span>
+      <span class="app-icon text-xl">unfold_more</span>
+    </button>
+  </div>
+
+  <div class="join">
+    <button class="join-item btn">
+      <span class="app-icon">navigate_before</span>
+    </button>
+    <button class="join-item btn">
+      {{ start() }} – {{ end() }} / {{ pagingInfo()?.numberOfElements }}
+    </button>
+    <button class="join-item btn">
+      <span class="app-icon">navigate_next</span>
+    </button>
+  </div>
+</div>

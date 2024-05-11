@@ -1,0 +1,221 @@
+<div>
+  <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-gray-900/80"></div>
+
+    <div class="fixed inset-0 flex">
+      <div class="relative mr-16 flex w-full max-w-xs flex-1 bg-base-100">
+        <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
+          <button type="button" class="-m-2.5 p-2.5">
+            <span class="sr-only">Close sidebar</span>
+            <svg
+              class="h-6 w-6 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2">
+          <div class="flex h-16 shrink-0 items-center">
+            <img
+              class="h-8 w-auto"
+              src="assets/app-logo.svg"
+              alt="Your Company"
+            />
+          </div>
+          <nav class="flex flex-1 flex-col">
+            <ul class="menu w-full rounded-box">
+              @for (item of menuItems(); track item) { @if
+              (item.children?.length) {
+              <li>
+                <a class="text-base">
+                  <span class="app-icon me-2 text-xl">{{item.icon}}</span>
+                  {{item.title}}</a
+                >
+                <ul>
+                  @for (child of item.children; track child) {
+                  <li>
+                    <a
+                      ><span class="app-icon me-2">{{child.icon}}</span>
+                      {{child.title}}</a
+                    >
+                  </li>
+                  }
+                </ul>
+              </li>
+              } @else {
+              <li>
+                <a class="text-base">
+                  <span class="app-icon me-2 text-xl">{{item.icon}}</span>
+                  {{item.title}}</a
+                >
+              </li>
+              } }
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col"
+    [class.lg:w-16]="!expand()"
+    [class.lg:w-72]="expand()"
+  >
+    <div
+      class="flex grow flex-col gap-y-4 border-r border-base-content/10 px-1 items-center relative"
+    >
+      <button
+        (click)="expand.set(!expand())"
+        class="absolute top-16 right-0 translate-x-1/2 z-20 rounded-full border-100 w-6 h-6 flex items-center justify-center shadow hover:!border-primary bg-base-200"
+      >
+        <span class="app-icon text-xl"
+          >{{ expand() ? 'chevron_left' : 'chevron_right'}}</span
+        >
+      </button>
+
+      <div class="flex h-16 shrink-0 items-center">
+        <img class="h-8 w-auto" [src]="expand() ? 'assets/app-logo-full.svg' : 'assets/app-logo.svg'" alt="Your Company" />
+      </div>
+      @if (expand()) {
+      <nav class="flex flex-1 flex-col w-full">
+        <ul class="menu w-full rounded-box">
+          @for (item of menuItems(); track item) { @if (item.children?.length) {
+          <li>
+            <a
+              class="text-base"
+              [routerLink]="item.url"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+            >
+              <span class="app-icon me-2 text-xl">{{item.icon}}</span>
+              {{item.title}}</a
+            >
+            <ul>
+              @for (child of item.children; track child) {
+              <li>
+                <a
+                  [routerLink]="child.url"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}"
+                  ><span class="app-icon me-2">{{child.icon}}</span>
+                  {{child.title}}</a
+                >
+              </li>
+              }
+            </ul>
+          </li>
+          } @else {
+          <li>
+            <a
+              class="text-base"
+              [routerLink]="item.url"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+            >
+              <span class="app-icon me-2 text-xl">{{item.icon}}</span>
+              {{item.title}}</a
+            >
+          </li>
+          } }
+        </ul>
+      </nav>
+
+      <!-- <ul class="menu w-full rounded-box mb-4">
+        <li>
+          <a class="text-base">
+            <span class="app-icon me-2 text-xl">person</span>User</a
+          >
+        </li>
+        <li>
+          <a class="text-base">
+            <span class="app-icon me-2 text-xl">logout</span>Đăng xuất</a
+          >
+        </li>
+      </ul> -->
+
+      <div class="rounded-box p-2 mt-auto mb-2 w-full">
+        <div class="flex gap-3 items-center">
+          <img
+            alt=""
+            class="rounded-full w-12 h-12 border"
+            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+          />
+
+          <div>
+            <p class="font-medium capitalize">Your name</p>
+            <span class="truncate text-sm">Admin, Guest</span>
+          </div>
+        </div>
+
+        <button class="btn w-full mt-3">
+          <span class="app-icon">logout</span>
+          Logout</button
+        >
+      </div>
+
+      } @else {
+      <nav class="flex flex-col">
+        @for (item of menuItems(); track item) {
+        <button class="btn btn-square btn-ghost">
+          <span class="app-icon"> {{item.icon}} </span>
+        </button>
+        }
+      </nav>
+
+      <ul class="menu bg-base-300 rounded-box mt-auto mb-4 menu-xs gap-2">
+        <li>
+          <a class="tooltip tooltip-right !px-0">
+            <div class="avatar rounded-full overflow-hidden">
+              <div class="w-6">
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="tooltip tooltip-right rounded-lg">
+           <span class="app-icon">logout</span>
+          </a>
+        </li>
+      </ul>
+      }
+    </div>
+  </div>
+
+  <main
+    class="py-2 h-screen"
+    [class.lg:pl-16]="!expand()"
+    [class.lg:pl-72]="expand()"
+  >
+    <div class="flex flex-col h-full overflow-auto">
+      <div
+        class="mx-4 sm:mx-6 lg:mx-8 flex items-center justify-between border-b border-base-content/10 mb-2 pb-1"
+      >
+        <div class="text-sm font-medium opacity-80 breadcrumbs">
+          <ul>
+            <li><a>Trang chủ</a></li>
+            @for (item of breadcrumbs(); track item) {
+            <li><a>{{ item.label }}</a></li>
+            }
+          </ul>
+        </div>
+        <lib-theme-toggle></lib-theme-toggle>
+      </div>
+
+      <div class="flex flex-col grow overflow-auto">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,77 @@
+<div class="flex items-center gap-2 mb-2 w-full">
+  <!-- <span class="app-icon text-xl">drag_indicator</span> -->
+
+  <div class="join grow flex">
+    <button
+      class="input input-bordered join-item !outline-none hover:text-primary w-fit whitespace-nowrap flex items-center"
+      [tp]="selectOprTpl"
+      [tpOffset]="[-5, -5]"
+      [tpUseHostWidth]="true"
+      tpVariation="popper"
+      tpPlacement="bottom"
+    >
+      <span class="w-12 truncate"> {{ item().operator }}</span>
+      <span class="app-icon">unfold_more</span>
+    </button>
+
+    <button
+      class="input input-bordered join-item truncate !outline-none hover:text-primary w-fit whitespace-nowrap flex gap-2 items-center"
+      [tp]="selectKeyTpl"
+      [tpOffset]="[-5, -5]"
+      [tpUseHostWidth]="true"
+      tpVariation="popper"
+      tpPlacement="bottom"
+    >
+      <span class="w-24 truncate"> {{ keyLabelDict()[item().key] }}</span>
+      <span class="app-icon">unfold_more</span>
+    </button>
+
+    <input
+      class="input input-bordered !outline-none join-item grow"
+      placeholder="Type value"
+      [ngModel]="item().value"
+      (ngModelChange)="onValueChange($event)"
+    />
+  </div>
+
+  <button (click)="remove.emit()"
+    class="btn btn-square btn-xs btn-ghost text-red-600"
+    [disabled]="!allowRemove()"
+  >
+    <span class="app-icon">delete</span>
+  </button>
+</div>
+
+<ng-template #selectKeyTpl let-hide>
+  <div class="select-popup-container">
+    <ul class="menu">
+      @for (key of keys(); track key) {
+      <li>
+        <a
+          class="flex justify-between items-center"
+          (click)="onKeyChange(key); hide()"
+          >{{ keyLabelDict()[key] }} @if (item().key === key){
+          <span class="app-icon">check</span>}</a
+        >
+      </li>
+      }
+    </ul>
+  </div>
+</ng-template>
+
+<ng-template #selectOprTpl let-hide>
+  <div class="select-popup-container">
+    <ul class="menu">
+      @for (opr of operators(); track opr) {
+      <li>
+        <a
+          class="flex justify-between items-center"
+          (click)="onOperatorChange(opr); hide()"
+          >{{ opr }} @if (item().operator === opr){
+          <span class="app-icon">check</span>}</a
+        >
+      </li>
+      }
+    </ul>
+  </div>
+</ng-template>

@@ -1,73 +1,76 @@
-<div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-md">
-    <img
-      class="mx-auto h-10 w-auto"
-      src="assets/app-logo.svg"
-      alt="Your Company"
-    />
-    <h2
-      class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-base-content/80"
-    >
-      Sign in with your account
-    </h2>
-  </div>
-
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[440px]">
-    <div
-      class="bg-base-100 px-6 py-8 shadow rounded-lg border border-base-content/10"
-    >
-      <form class="space-y-6" [formGroup]="loginForm">
-        <div>
-          <label
-            for="email"
-            class="block text-sm font-medium leading-6 text-base-content/80"
-            >Email address</label
-          >
-          <div class="mt-2">
-            <input
-              formControlName="username"
-              formErrorTooltip
-              class="input input-bordered w-full"
-              placeholder="Type your email"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label
-            for="password"
-            class="block text-sm font-medium leading-6 text-base-content/80"
-            >Password</label
-          >
-          <div class="mt-2">
-            <input
-              formControlName="password"
-              formErrorTooltip
-              class="input input-bordered w-full"
-              type="password"
-              placeholder="Type your password"
-            />
-          </div>
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <input
-              id="remember-me"
-              name="remember-me"
-              type="checkbox"
-              class="checkbox checkbox-primary"
-            />
-            <label for="remember-me" class="ml-3 block text-sm leading-6"
-              >Remember me</label
+<div class="w-screen h-screen flex flex-col login">
+  <div class="flex min-h-full w-full flex-col items-center py-2 lg:py-36 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+      <img
+        class="mx-auto h-10 w-auto"
+        src="assets/app-logo.svg"
+        alt="Your Company"
+      />
+      <h2
+        class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-base-content/80"
+      >
+        Sign in with your account
+      </h2>
+    </div>
+  
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[440px]">
+      <div
+        class="bg-base-100 px-6 py-8 shadow rounded-lg border border-base-content/10"
+      >
+        <form class="space-y-6" [formGroup]="loginForm">
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium leading-6 text-base-content/80"
+              >Email address</label
             >
+            <div class="mt-2">
+              <input
+                formControlName="username"
+                formErrorTooltip
+                class="input input-bordered w-full"
+                placeholder="Type your email"
+              />
+            </div>
           </div>
-        </div>
-
-        <div>
-          <button (click)="onSubmit()" type="submit" class="btn btn-primary w-full">Sign in</button>
-        </div>
-      </form>
+  
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium leading-6 text-base-content/80"
+              >Password</label
+            >
+            <div class="mt-2">
+              <input
+                formControlName="password"
+                formErrorTooltip
+                class="input input-bordered w-full"
+                type="password"
+                placeholder="Type your password"
+              />
+            </div>
+          </div>
+  
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                class="checkbox checkbox-primary"
+              />
+              <label for="remember-me" class="ml-3 block text-sm leading-6"
+                >Remember me</label
+              >
+            </div>
+          </div>
+  
+          <div>
+            <button (click)="onSubmit()" type="submit" class="btn btn-primary w-full">Sign in</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
+

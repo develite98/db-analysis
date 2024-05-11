@@ -1,0 +1,17 @@
+
+<label class="swap swap-rotate">
+    <input
+      type="checkbox"
+      class="theme-controller"
+      [ngModel]="store.active() === 'dark'"
+      (ngModelChange)="store.toggleTheme()"
+    />
+
+    <span class="app-icon swap-off !text-2xl">
+      light_mode
+    </span>
+
+    <span class="app-icon swap-on !text-2xl">
+      dark_mode
+    </span>
+  </label>

@@ -1,0 +1,7 @@
+.step-item {
+  @apply rounded-full border border-base-content/20 w-6 h-6 inline-flex items-center justify-center;
+
+  &.active {
+    @apply bg-primary text-primary-content;
+  }
+}

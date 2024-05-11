@@ -3,3 +3,38 @@
 @tailwind utilities;
 
 @import url('./styles/tooltip.scss');
+@import url('./styles/icon.scss');
+
+.px-primary {
+  @apply px-4 sm:px-6 lg:px-8;
+}
+
+.border-100 {
+  @apply border border-base-content/10;
+}
+
+body {
+  font-family: 'Inter var', ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
+}
+
+* {
+  ::-webkit-scrollbar-track {
+    background-color: oklch(var(--b1));
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    height: 12px;
+    width: 12px;
+    background: oklch(var(--bc) / 0.3);
+    background-clip: padding-box;
+    border: 3px solid transparent;
+  }
+}
