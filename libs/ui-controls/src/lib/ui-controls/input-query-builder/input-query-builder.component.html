@@ -57,7 +57,7 @@
     <ul class="menu">
       @for (option of filteredOptions(); track option; let i = $index) {
       <li>
-        <a [class.active]="activeIndex === i">
+        <a [class.active]="activeIndex === i" (click)="activeIndex = i; add()">
           {{ option }}
         </a>
       </li>
@@ -77,9 +77,7 @@
         <kbd class="kbd kbd-sm">Enter</kbd> để @if (step === ACTION.Value) {
         thêm filter } @else { chọn }
       </p>
-      <p class="mt-2">
-        <kbd class="kbd kbd-sm">Escape</kbd> để tắt
-      </p>
+      <p class="mt-2"><kbd class="kbd kbd-sm">Escape</kbd> để tắt</p>
     </div>
   </div>
 </ng-template>

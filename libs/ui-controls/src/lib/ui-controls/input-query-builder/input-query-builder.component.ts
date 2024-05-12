@@ -116,7 +116,7 @@ export class InputQueryBuilderComponent {
         .reduce((a, b) => `${a} ${b}`, '')
         .trim();
 
-      this.searchControl.patchValue(word);
+      this.searchControl.patchValue(word + ' ');
     }
   }
 

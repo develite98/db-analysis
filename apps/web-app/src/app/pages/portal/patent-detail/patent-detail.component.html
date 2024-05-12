@@ -1,4 +1,5 @@
-<div class="px-primary container mx-auto">
+<div class="px-primary container
+ mx-auto">
   <div class="px-primary border shadow rounded-box mt-6 pt-4">
     <div class="mb-4">
     <span class="flex gap-2 items-center text-xl" (click)="goBack()">
@@ -31,7 +32,22 @@
       </div>
       }
     </div>
-    <div class="mt-6 border-t border-base-content/10">
+
+    <div class="flex items-end mt-6">
+        <div role="tablist" class="tabs tabs-lifted w-fit tabs-lg">
+            <a role="tab" class="tab tab-active">National Biblio. Data</a>
+            <a role="tab" class="tab">Description</a>
+            <a role="tab" class="tab">Claims</a>
+            <a role="tab" class="tab">Patent Family</a>
+            <a role="tab" class="tab">Documents</a>
+        </div>
+        <div class="grow border-b border-base-content/10">
+
+        </div>
+    </div>
+
+
+    <div class="">
       <dl class="divide-y divide-base-content/10">
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Title</dt>
