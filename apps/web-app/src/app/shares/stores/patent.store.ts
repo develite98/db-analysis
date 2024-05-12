@@ -86,7 +86,6 @@ export const PatentStore = signalStore(
     changeField: (field: Field) => {
       patchState(store, (s) => ({ ...s, selectedField: field }));
     },
-
     toggleMode: () => {
       const state = getState(store);
       const newMode =
@@ -105,6 +104,7 @@ export const PatentStore = signalStore(
           ...s,
           mode: newMode,
           searchFields: searchFields,
+          keyword: `${searchFields[0].operator} ${searchFields[0].key} ${searchFields[0].value}`,
         }));
       } else {
         patchState(store, (s) => ({

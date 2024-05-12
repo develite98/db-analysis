@@ -3,7 +3,7 @@
 
   <div class="join">
     <button
-      class="input input-bordered btn-sm join-item !outline-none hover:text-primary w-fit whitespace-nowrap flex items-center px-3 py-6"
+      class="input input-bordered btn-sm join-item !outline-none hover:text-primary w-fit whitespace-nowrap flex items-center px-3 py-4"
       [tp]="selectOprTpl"
       [tpOffset]="[-5, -5]"
       [tpUseHostWidth]="true"
@@ -15,7 +15,7 @@
     </button>
 
     <button
-      class="input input-bordered join-item  btn-sm truncate !outline-none hover:text-primary w-fit whitespace-nowrap flex gap-2 items-center px-3 py-6"
+      class="input input-bordered join-item  btn-sm truncate !outline-none hover:text-primary w-fit whitespace-nowrap flex gap-2 items-center px-3 py-4"
       [tp]="selectKeyTpl"
       [tpOffset]="[-5, -5]"
       [tpUseHostWidth]="true"
@@ -27,7 +27,7 @@
     </button>
 
     <input
-      class="input input-bordered !outline-none join-item grow input-sm min-w-[200px] px-3 py-6"
+      class="input input-bordered !outline-none join-item grow input-sm min-w-[140px] px-3 py-4"
       placeholder="Type value"
       [ngModel]="item().value"
       (ngModelChange)="onValueChange($event)"

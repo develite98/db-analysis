@@ -4,9 +4,11 @@ import {
   Component,
   EventEmitter,
   Output,
+  effect,
+  model,
   signal,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllExpressions, PatentFields, QueryFilter } from '@ng-lab/core';
 import { TippyDirective } from '@ngneat/helipopper';
 import { startWith } from 'rxjs';
@@ -21,14 +23,17 @@ export enum Action {
 @Component({
   selector: 'lib-input-query-builder',
   standalone: true,
-  imports: [TippyDirective, ReactiveFormsModule, AsyncPipe],
+  imports: [TippyDirective, FormsModule, AsyncPipe],
   templateUrl: './input-query-builder.component.html',
   styleUrl: './input-query-builder.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputQueryBuilderComponent {
+  public pattern =
+    /(AND|OR|XOR)\s+(patentCode|patentNo|patentName|title|applicantNo|summary)\s+(?:[^"\s]+|"[^"]+")/g;
+
   public showAutocomplete = signal(false);
-  public searchControl = new FormControl();
+  public searchText = model('');
   public filteredOptions = signal<string[]>([]);
   public activeIndex = 0;
   public step: Action = Action.Field;
@@ -48,17 +53,50 @@ export class InputQueryBuilderComponent {
     },
   };
 
-  @Output() public addFilter = new EventEmitter<QueryFilter>();
+  @Output() public addFilter = new EventEmitter<string>();
+  @Output() public searchChange = new EventEmitter();
 
   constructor() {
-    this.searchControl.valueChanges.pipe(startWith('')).subscribe((value) => {
-      const words = value.split(' ');
-      this.processOptions(words || []);
-    });
+    effect(
+      () => {
+        const value = this.searchText();
+        let text = value;
+        const matched = value.match(this.pattern);
+        text = value.replace(this.pattern, '');
+
+        if (matched) {
+          for (let i = 0; i < matched?.length - 1; i++) {
+            text = text.replace(' ', '');
+          }
+        }
+
+        const isMatchAndFull = matched && matched.length > 0 && !text;
+
+        const words = (
+          text === ' ' || (text.startsWith(' ') && text.length >= 2)
+            ? text.replace(' ', '')
+            : text
+        ).split(' ');
+
+        this.processOptions(words, isMatchAndFull);
+        this.searchChange.emit(value);
+      },
+      { allowSignalWrites: true }
+    );
   }
 
-  public processOptions(values: string[]) {
+  public processOptions(values: string[], isMatchAndFull: boolean | null) {
     const length = values.length;
+
+    if (length >= 3 || isMatchAndFull) {
+      this.step = Action.Value;
+      const [operator, key, ...value] = values;
+      this.filteredOptions.set(
+        this.dict[2].options.filter((o) => o.includes(value.join(' ')))
+      );
+      return;
+    }
+
     this.step = Action.Field;
     if (length === 0) {
       this.filteredOptions.set(this.dict[0].options);
@@ -72,52 +110,31 @@ export class InputQueryBuilderComponent {
       return;
     }
 
-    this.step = Action.Operator;
     if (length === 2) {
+      this.step = Action.Operator;
       this.filteredOptions.set(
         this.dict[1].options.filter((o) => o.includes(values[1]))
-      );
-      return;
-    }
-
-    this.step = Action.Value;
-    if (length >= 3) {
-      const [operator, key, ...value] = values;
-      this.filteredOptions.set(
-        this.dict[2].options.filter((o) => o.includes(value.join(' ')))
       );
       return;
     }
   }
 
   public add() {
-    const words = ((this.searchControl.value as string) || '').split(' ') || [];
-    if (this.validate()) {
-      const [operator, key, ...value] = words;
-      this.addFilter.emit({
-        key: key,
-        operator: operator,
-        value: value.join(' ').trim(),
-      });
-
-      this.searchControl.patchValue('');
+    const words = ((this.searchText() as string) || '').split(' ') || [];
+    const optionToInSearch = this.filteredOptions()[this.activeIndex];
+    const latestWords = words[words.length - 1];
+    if (!latestWords) {
+      words.push(optionToInSearch);
     } else {
-      const optionToInSearch = this.filteredOptions()[this.activeIndex];
-
-      const latestWords = words[words.length - 1];
-      if (!latestWords) {
-        words.push(optionToInSearch);
-      } else {
-        words[words.length - 1] = optionToInSearch;
-      }
-
-      const word = words
-        .filter(Boolean)
-        .reduce((a, b) => `${a} ${b}`, '')
-        .trim();
-
-      this.searchControl.patchValue(word + ' ');
+      words[words.length - 1] = optionToInSearch;
     }
+
+    const word = words
+      .filter(Boolean)
+      .reduce((a, b) => `${a} ${b}`, '')
+      .trim();
+
+    this.searchText.update(() => word + ' ');
   }
 
   public moveNext(event: Event) {
@@ -143,13 +160,13 @@ export class InputQueryBuilderComponent {
   }
 
   public validate() {
-    const words = ((this.searchControl.value as string) || '').split(' ') || [];
-    const length = words.length;
-    if (length < 3) return false;
+    // const words = ((this.searchControl.value as string) || '').split(' ') || [];
+    // const length = words.length;
+    // if (length < 3) return false;
 
-    const [key, operator, ...value] = words;
-    const searchText = value.join(' ').trim();
-    if (!searchText) return false;
+    // const [key, operator, ...value] = words;
+    // const searchText = value.join(' ').trim();
+    // if (!searchText) return false;
 
     return true;
   }

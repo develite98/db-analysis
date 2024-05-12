@@ -10,7 +10,7 @@
 >
   <span class="app-icon" data-tooltip="Help query ?">help</span>
   <input
-    [formControl]="searchControl"
+    [(ngModel)]="searchText"
     class="grow min-w-[500px]"
     placeholder="Tìm kiếm..."
     (keydown.ArrowDown)="moveNext($event)"
