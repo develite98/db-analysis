@@ -14,8 +14,10 @@
 }
 
 body {
-  font-family: 'Inter var', ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  color: #0b2a43;
+  font-family: Helvetica Neue, arial, sans-serif;
 }
 
 * {

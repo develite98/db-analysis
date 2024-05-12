@@ -100,16 +100,22 @@ export const PatentStore = signalStore(
           },
         ];
 
+        const currentText = searchFields[0].value;
+        const keyword = currentText?.includes(' ')
+          ? `"${currentText.trim()}"`
+          : currentText;
+
         patchState(store, (s) => ({
           ...s,
           mode: newMode,
           searchFields: searchFields,
-          keyword: `${searchFields[0].operator} ${searchFields[0].key} ${searchFields[0].value}`,
+          keyword: `${searchFields[0].operator} ${searchFields[0].key} ${keyword}`,
         }));
       } else {
         patchState(store, (s) => ({
           ...s,
           mode: newMode,
+          keyword: '',
         }));
       }
     },

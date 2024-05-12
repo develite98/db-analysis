@@ -8,7 +8,6 @@
   tpVariation="popper"
   tpPlacement="bottom"
 >
-  <span class="app-icon" data-tooltip="Help query ?">help</span>
   <input
     [(ngModel)]="searchText"
     class="grow min-w-[500px]"
@@ -19,7 +18,7 @@
     (keydown.escape)="tooltip.hide()"
   />
 
-  <kbd class="kbd kbd-sm">Enter</kbd>
+  <span class="app-icon" data-tooltip="Help query ?">help</span>
 </label>
 
 <ng-template #selectTpl let-hide>
