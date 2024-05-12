@@ -1,62 +1,12 @@
 <div class="grow flex flex-col overflow-auto pt-2">
   <div class="py-2 px-primary flex items-center">
     <h2 class="text-3xl font-bold">Sáng Chế</h2>
-
-    <div class="h-3/4 w-px bg-base-content/20 me-4 ms-6"></div>
-
-    <label class="swap">
-      <input type="checkbox"  [ngModel]="patentStore.isAdvancedMode()"
-      (ngModelChange)="patentStore.toggleMode()"/>
- 
-      <a class="swap-off text-lg link link-hover link-primary">Tìm kiếm nâng cao</a>
-      <a class="swap-on text-lg link link-hover link-primary">Tìm kiếm cơ bản</a>      
-    </label>
   </div>
 
-  <div
-    class="w-full h-full overflow-auto grid grid-cols-12 gap-4 md:gap-6 lg:gap-8 grow mt-4 px-primary"
-  >
-    @if (patentStore.isAdvancedMode()) {
-    <div
-      class="col-span-3 h-full overflow-auto border-r border-base-content/10 pr-4 md:pr-6 lg:pr-8"
-    >
-      <div class="flex gap-2">
-        <lib-input-query-builder
-          class="block mb-4 grow"
-          (addFilter)="patentStore.addFilter($event)"
-        ></lib-input-query-builder>
-
-
-        <button class="btn btn-primary" (click)="patentStore.simpleSearch()">
-          Tìm kiếm
-        </button>
-      </div>
-
-      @for (item of patentStore.searchFields(); track item; let i = $index) {
-      <app-filter-item
-        [item]="item"
-        [allowRemove]="patentStore.searchFields().length > 1"
-        (remove)="patentStore.removeFilter(i)"
-      ></app-filter-item>
-      }
-
-      <span
-        class="flex gap-2 items-center"
-        (click)="patentStore.addFilter(undefined)"
-      >
-        <span class="app-icon"> add_circle </span>
-        <a class="link link-primary link-hover"> Thêm trường tìm kiếm khác </a>
-      </span>
-    </div>
-    }
-
-    <div
-      class="h-full overflow-auto flex flex-col gap-2"
-      [class.col-span-12]="!patentStore.isAdvancedMode()"
-      [class.col-span-9]="patentStore.isAdvancedMode()"
-    >
-      @if (!patentStore.isAdvancedMode()) {
+  <div class="w-full grow overflow-auto px-primary flex flex-col">
+    <div class="w-full mt-4">
       <div class="flex gap-2 mb-4">
+        @if (!patentStore.isAdvancedMode()) {
         <div class="join">
           <button
             #tooltip="tippy"
@@ -68,7 +18,7 @@
             tpVariation="popper"
             tpPlacement="bottom"
           >
-            <span class="w-24 truncate">
+            <span class="w-24 truncate font-medium">
               {{ patentStore.selectedField().label }}</span
             >
             <span class="app-icon text-xl">unfold_more</span>
@@ -92,37 +42,95 @@
           >
 
           <input
-            class="input input-bordered !outline-none min-w-96 join-item"
+            class="input input-bordered !outline-none min-w-[500px] join-item"
             [ngModel]="patentStore.keyword()"
             (ngModelChange)="patentStore.changeSearchText($event)"
             placeholder="Từ khóa tìm kiếm.."
           />
         </div>
+        } @else {
+        <lib-input-query-builder
+          class="block min-w-[500px]"
+          (addFilter)="patentStore.addFilter($event)"
+        ></lib-input-query-builder>
+        }
 
         <button class="btn btn-primary" (click)="patentStore.simpleSearch()">
-          Tìm kiếm
+          <span class="app-icon">search</span> Tìm kiếm
         </button>
+
+        <label class="swap ms-2">
+          <input
+            type="checkbox"
+            [ngModel]="patentStore.isAdvancedMode()"
+            (ngModelChange)="patentStore.toggleMode()"
+          />
+
+          <a class="swap-off text link link-hover link-primary"
+            >Tìm kiếm nâng cao</a
+          >
+          <a class="swap-on text link link-hover link-primary"
+            >Tìm kiếm cơ bản</a
+          >
+        </label>
+      </div>
+    </div>
+
+    <div class="h-full overflow-auto grow flex gap-2 col-span-12">
+      @if (patentStore.isAdvancedMode()) {
+      <div
+        class="h-full border-r border-base-content/10 pr-2 "
+      >
+        @for (item of patentStore.searchFields(); track item; let i = $index) {
+        <app-filter-item
+          [item]="item"
+          [allowRemove]="patentStore.searchFields().length > 1"
+          (remove)="patentStore.removeFilter(i)"
+        ></app-filter-item>
+        }
+
+        <span
+          class="flex gap-2 items-center"
+          (click)="patentStore.addFilter(undefined)"
+        >
+          <span class="app-icon"> add_circle </span>
+          <a class="link link-primary link-hover">
+            Thêm trường tìm kiếm khác
+          </a>
+        </span>
       </div>
       }
 
-      <div class="flex flex-col grow overflow-auto gap-3">
-        @if (patentStore.isLoading()) {
-        <div class="skeleton rounded-lg h-22 w-3/4"></div>
-        <div class="skeleton rounded-lg h-22 w-1/2"></div>
-        <div class="skeleton rounded-lg h-20 w-3/4"></div>
-        <div class="skeleton rounded-lg h-16 w-1/2"></div>
-        <div class="skeleton h-8 w-1/4"></div>
-        <div class="skeleton h-4 w-1/5"></div>
-        } @if (patentStore.isSuccess()) { @for (item of patentStore.data();
-        track item; let i = $index) {
-        <app-patent-card [patent]="item" [no]="i + 1" (titleClick)="goDetail(item)"></app-patent-card>
-        } }
-      </div>
+      <div class="grow flex flex-col overflow-auto">
+        <div class="flex flex-col grow overflow-auto gap-3">
+          @if (patentStore.isLoading()) {
+          <div class="skeleton rounded-lg h-22 w-3/4"></div>
+          <div class="skeleton rounded-lg h-22 w-1/2"></div>
+          <div class="skeleton rounded-lg h-20 w-3/4"></div>
+          <div class="skeleton rounded-lg h-16 w-1/2"></div>
+          <div class="skeleton h-8 w-1/4"></div>
+          <div class="skeleton h-4 w-1/5"></div>
+          } @if (patentStore.isSuccess()) { @for (item of patentStore.data();
+          track item; let i = $index) {
+          <app-patent-card
+            [patent]="item"
+            [no]="i + 1"
+            (titleClick)="goDetail(item)"
+          ></app-patent-card>
+          } @for (item of patentStore.data(); track item; let i = $index) {
+          <app-patent-card
+            [patent]="item"
+            [no]="i + 1"
+            (titleClick)="goDetail(item)"
+          ></app-patent-card>
+          } }
+        </div>
 
-      <div class="mt-auto flex items-center gap-2 mb-2">
-        <lib-pagination
-          [pagingInfo]="patentStore.pagingInfo()"
-        ></lib-pagination>
+        <div class="mt-auto flex items-center gap-2 mb-2">
+          <lib-pagination
+            [pagingInfo]="patentStore.pagingInfo()"
+          ></lib-pagination>
+        </div>
       </div>
     </div>
   </div>

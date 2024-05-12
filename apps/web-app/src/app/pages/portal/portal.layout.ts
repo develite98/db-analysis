@@ -51,7 +51,7 @@ export class PortalLayoutComponent {
         },
         {
           title: 'Báo cáo',
-          url: undefined,
+          url: 'patent/report',
           icon: 'analytics',
         },
       ],

@@ -8,9 +8,10 @@
   tpVariation="popper"
   tpPlacement="bottom"
 >
+  <span class="app-icon" data-tooltip="Help query ?">help</span>
   <input
     [formControl]="searchControl"
-    class="grow"
+    class="grow min-w-[500px]"
     placeholder="Tìm kiếm..."
     (keydown.ArrowDown)="moveNext($event)"
     (keydown.ArrowUp)="movePrevious($event)"

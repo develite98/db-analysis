@@ -33,6 +33,16 @@ export const PORTAL_ROUTES: Routes = [
               ),
           },
           {
+            path: 'report',
+            data: {
+              name: 'Báo cáo',
+            },
+            loadComponent: () =>
+              import('./patent-report/patent-report.component').then(
+                (c) => c.PatentReportComponent
+              ),
+          },
+          {
             path: '',
             redirectTo: 'search',
             pathMatch: 'full',

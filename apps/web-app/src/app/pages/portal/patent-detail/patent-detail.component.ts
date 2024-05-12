@@ -9,11 +9,12 @@ import { CommonModule } from '@angular/common';
 import { BaseComponent, Patent, PatentApiService } from '@ng-lab/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs';
+import { BarChartRaceComponent } from '@ng-lab/ui-controls';
 
 @Component({
   selector: 'app-patent-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BarChartRaceComponent],
   templateUrl: './patent-detail.component.html',
   styleUrl: './patent-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

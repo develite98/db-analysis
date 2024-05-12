@@ -18,6 +18,7 @@ import { TippyDirective } from '@ngneat/helipopper';
 @Component({
   selector: 'app-filter-item',
   templateUrl: './filter-item.component.html',
+  styleUrls: ['./filter-item.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule, TippyDirective],
