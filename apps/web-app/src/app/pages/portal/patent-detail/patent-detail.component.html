@@ -1,13 +1,12 @@
-<div class="px-primary container
- mx-auto">
-  <div class="px-primary border shadow rounded-box mt-6 pt-4">
-    <div class="mb-4">
-    <span class="flex gap-2 items-center text-xl" (click)="goBack()">
-        <span class="app-icon">keyboard_return</span>
-        <a class="link link-hover">Trở lại</a>
-      </span>
+<div class="max-w-screen-xl mx-auto">
+  <div class="border shadow rounded-box mt-6 pt-4">
+    <div class="mb-4 px-primary ">
+        <span class="flex gap-2 items-center text-xl" (click)="goBack()">
+            <span class="app-icon">keyboard_return</span>
+            <a class="link link-hover">Trở lại</a>
+        </span>
     </div>
-    <div class="px-4 sm:px-0">
+    <div class="px-primary ">
       @if (isLoading()) {
       <div class="skeleton h-8 w-96 rounded-lg"></div>
 
@@ -35,7 +34,8 @@
 
     <div class="flex items-end mt-6">
         <div role="tablist" class="tabs tabs-lifted w-fit tabs-lg">
-            <a role="tab" class="tab tab-active">National Biblio. Data</a>
+            <a role="tab" class="tab w-4 sm:w-6 lg:w-8 !mx-0 !px-0"></a>
+            <a role="tab" class="tab tab-active font-medium">National Biblio. Data</a>
             <a role="tab" class="tab">Description</a>
             <a role="tab" class="tab">Claims</a>
             <a role="tab" class="tab">Patent Family</a>
@@ -47,7 +47,7 @@
     </div>
 
 
-    <div class="">
+    <div class="px-primary">
       <dl class="divide-y divide-base-content/10">
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Title</dt>
