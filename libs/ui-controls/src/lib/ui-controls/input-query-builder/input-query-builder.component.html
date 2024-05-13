@@ -4,80 +4,87 @@
   [tp]="selectTpl"
   [tpUseHostWidth]="true"
   [tpInteractive]="true"
-  [tpHideOnClick]="true"
   tpVariation="popper"
   tpPlacement="bottom"
+  tpTrigger="manual"
 >
   <input
+    #input
     [(ngModel)]="searchText"
-    class="grow min-w-[500px]"
+    class="grow min-w-[600px]"
     placeholder="Tìm kiếm..."
     (keydown.ArrowDown)="moveNext($event)"
     (keydown.ArrowUp)="movePrevious($event)"
     (keydown.enter)="add()"
+    (click)="tooltip.show()"
     (keydown.escape)="tooltip.hide()"
   />
 
   <span class="app-icon" data-tooltip="Help query ?">help</span>
+
+  <ng-template #selectTpl let-hide>
+    <div class="select-popup-container">
+      <div class="pt-2 px-4 font-bold">
+        @if (step === ACTION.Field) {
+        <span class="flex items-center gap-2">
+          <span class="step-item active">1</span>
+          <span>Chọn điều kiện</span>
+          -
+          <span class="step-item">2</span>
+          -
+          <span class="step-item">3</span>
+        </span>
+        } @else if (step === ACTION.Operator) {
+        <span class="flex items-center gap-2">
+          <span class="step-item">1</span>
+          -
+          <span class="step-item active">2</span>
+          <span>Chọn trường dữ liệu</span>
+          -
+          <span class="step-item">3</span>
+        </span>
+        } @else if (step === ACTION.Value) {
+        <span class="flex items-center gap-2">
+          <span class="step-item">1</span>
+          -
+          <span class="step-item">2</span>
+          -
+          <span class="step-item active">3</span>
+          <span>Nhập từ khóa hoặc chọn gợi ý</span>
+        </span>
+        }
+      </div>
+  
+      <ul class="menu">
+        @for (option of filteredOptions(); track option; let i = $index) {
+        <li>
+          <a
+            [class.active]="activeIndex === i"
+            (click)="activeIndex = i; add(); tooltip.show(); input.focus()"
+          >
+            {{ option }}
+          </a>
+        </li>
+        } @empty {
+        <span class="px-4 py-2 text-center italic text-base-content/60">
+          Không tìm thấy đề xuất nào
+        </span>
+        }
+      </ul>
+  
+      <div class="py-2 px-4 text-sm mt-2 border-t border-100">
+        <p>
+          <kbd class="kbd kbd-sm">Up</kbd>
+          <kbd class="ms-1 kbd kbd-sm">Down</kbd> để di chuyển,
+        </p>
+        <p class="mt-2">
+          <kbd class="kbd kbd-sm">Enter</kbd> để @if (step === ACTION.Value) {
+          thêm filter } @else { chọn }
+        </p>
+        <p class="mt-2"><kbd class="kbd kbd-sm">Escape</kbd> để tắt</p>
+      </div>
+    </div>
+  </ng-template>
+  
 </label>
 
-<ng-template #selectTpl let-hide>
-  <div class="select-popup-container">
-    <div class="pt-2 px-4 font-medium">
-      @if (step === ACTION.Field) {
-      <span class="flex items-center gap-2">
-        <span class="step-item active">1</span>
-        <span>Chọn điều kiện</span>
-        -
-        <span class="step-item">2</span>
-        -
-        <span class="step-item">3</span>
-      </span>
-      } @else if (step === ACTION.Operator) {
-      <span class="flex items-center gap-2">
-        <span class="step-item">1</span>
-        -
-        <span class="step-item active">2</span>
-        <span>Chọn trường dữ liệu</span>
-        -
-        <span class="step-item">3</span>
-      </span>
-      } @else if (step === ACTION.Value) {
-      <span class="flex items-center gap-2">
-        <span class="step-item">1</span>
-        -
-        <span class="step-item">2</span>
-        -
-        <span class="step-item active">3</span>
-        <span>Nhập hoặc chọn gợi ý</span>
-      </span>
-      }
-    </div>
-
-    <ul class="menu">
-      @for (option of filteredOptions(); track option; let i = $index) {
-      <li>
-        <a [class.active]="activeIndex === i" (click)="activeIndex = i; add()">
-          {{ option }}
-        </a>
-      </li>
-      } @empty {
-      <span class="px-4 py-2 text-center italic text-base-content/60">
-        No suggestion found
-      </span>
-      }
-    </ul>
-
-    <div class="py-2 px-4 text-sm mt-2 border-t border-100">
-      <p>
-        <kbd class="kbd kbd-sm">Up</kbd>
-        <kbd class="ms-1 kbd kbd-sm">Down</kbd> để di chuyển,
-      </p>
-      <p class="mt-2">
-        <kbd class="kbd kbd-sm">Enter</kbd> để @if (step === ACTION.Value) {
-        thêm filter } @else { chọn }
-      </p>
-      <p class="mt-2"><kbd class="kbd kbd-sm">Escape</kbd> để tắt</p>
-    </div>
-  </div>
-</ng-template>

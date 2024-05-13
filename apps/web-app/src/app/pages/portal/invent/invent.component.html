@@ -1,11 +1,11 @@
 <div class="grow flex flex-col overflow-auto pt-2">
-  <div class="py-2 px-primary flex items-center">
-    <h2 class="text-3xl font-bold">Sáng chế</h2>
+  <div class="py-1 px-primary flex items-center">
+    <h2 class="text-2xl font-bold">Sáng chế</h2>
   </div>
 
   <div class="w-full grow overflow-auto px-primary flex flex-col">
-    <div class="w-full mt-4">
-      <div class="flex gap-2 mb-4">
+    <div class="w-full mt-4 border-b pb-2 mb-2 border-base-content/10">
+      <div class="flex gap-2">
         @if (!patentStore.isAdvancedMode()) {
         <div class="join">
           <button
@@ -14,11 +14,11 @@
             (click)="$event.preventDefault(); tooltip.show()"
             [tp]="selectTpl"
             [tpOffset]="[-5, -5]"
-            [tpUseHostWidth]="true"
+            [tpUseHostWidth]="true" 
             tpVariation="popper"
             tpPlacement="bottom"
           >
-            <span class="w-24 truncate font-medium">
+            <span class="w-24 truncate font-bold">
               {{ patentStore.selectedField().label }}</span
             >
             <span class="app-icon text-xl">unfold_more</span>
@@ -31,7 +31,7 @@
                 <li>
                   <a
                     class="flex justify-between items-center"
-                    (click)="patentStore.changeField(item)"
+                    (click)="patentStore.changeField(item); hide()"
                     >{{ item.label }} @if (patentStore.selectedField().value ===
                     item.value){ <span class="app-icon">check</span>}</a
                   >
@@ -66,10 +66,10 @@
             (ngModelChange)="patentStore.toggleMode()"
           />
 
-          <a class="swap-off text link link-hover link-primary"
+          <a class="swap-off text link link-hover link-primary font-bold"
             >Tìm kiếm nâng cao</a
           >
-          <a class="swap-on text link link-hover link-primary"
+          <a class="swap-on text link link-hover link-primary font-bold"
             >Tìm kiếm cơ bản</a
           >
         </label>
@@ -78,7 +78,7 @@
 
     <div class="h-full overflow-auto grow flex gap-2 col-span-12">
       <!-- @if (patentStore.isAdvancedMode()) {
-      <div class="h-full border-r border-base-content/10 pr-2">
+      <div class="h-full border-r border-base-content/20 pr-2">
         @for (item of patentStore.searchFields(); track item; let i = $index) {
         <app-filter-item
           [item]="item"
@@ -115,16 +115,20 @@
             [no]="i + 1"
             (titleClick)="goDetail(item)"
           ></app-patent-card>
-          } @for (item of patentStore.data(); track item; let i = $index) {
-          <app-patent-card
-            [patent]="item"
-            [no]="i + 1"
-            (titleClick)="goDetail(item)"
-          ></app-patent-card>
+          } @empty {
+            <div class="text-center h-full flex items-center justify-center flex-col">
+              <button type="button" class="relative block rounded-lg border-2 border-dashed border-base-content/20 p-12 text-center  focus:outline-none ">
+                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6" />
+                </svg>
+                <h3 class="mt-2 text-xl font-semibold text-gray-900">Không có dữ liệu</h3>
+                <p class="mt-1 text-base text-base-content/50">Hãy thử với bộ lọc khác.</p>
+              </button>
+            </div>
           } }
         </div>
 
-        <div class="mt-auto flex items-center gap-2 mb-2">
+        <div class="mt-auto flex items-center gap-2 mb-2 pt-2">
           <lib-pagination
             [pagingInfo]="patentStore.pagingInfo()"
           ></lib-pagination>

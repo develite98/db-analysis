@@ -4,7 +4,7 @@ import { RequestResponse } from '../models/request-response';
 import { SimpleGetPatentResult } from '../models/simple-get-patent-result';
 import { BaseApiService, IHttpParamObject } from './base-api.service';
 import { Observable } from 'rxjs';
-import { Patent } from '../models';
+import { Pagination, Patent, QueryFilter } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class PatentApiService extends BaseApiService {
@@ -13,6 +13,16 @@ export class PatentApiService extends BaseApiService {
   ): Observable<RequestResponse<SimpleGetPatentResult>> {
     return this.get(
       'http://152.42.216.74:8989/pct-service/patent/simple-search',
+      request as unknown as IHttpParamObject
+    );
+  }
+
+  public advancedSearch(request: {
+    pagingRequest: Pagination;
+    searchFields: QueryFilter[];
+  }): Observable<RequestResponse<SimpleGetPatentResult>> {
+    return this.post(
+      'http://152.42.216.74:8989/pct-service/patent/field-combination-search',
       request as unknown as IHttpParamObject
     );
   }

@@ -126,23 +126,68 @@ export const PatentStore = signalStore(
         status: StateStatus.Loading,
       }));
 
-      patentApi
-        .simpleSearch({
-          keyword: state.keyword,
-          page: state.pagingInfo.currentPage,
-          size: state.pagingInfo.size,
-        })
-        .pipe(delay(500))
-        .subscribe({
-          next: (result) => {
-            patchState(store, (s) => ({
-              ...s,
-              data: result.data.content,
-              pagingInfo: result.data.pagination,
-              status: StateStatus.Success,
-            }));
-          },
-        });
+      if (state.mode === Mode.Simple) {
+        patentApi
+          .simpleSearch({
+            keyword: state.keyword,
+            page: state.pagingInfo.currentPage,
+            size: state.pagingInfo.size,
+          })
+          .pipe(delay(500))
+          .subscribe({
+            next: (result) => {
+              patchState(store, (s) => ({
+                ...s,
+                data: result.data.content,
+                pagingInfo: result.data.pagination,
+                status: StateStatus.Success,
+              }));
+            },
+          });
+      } else {
+        const pattern =
+          /(AND|OR|XOR)\s+(patentCode|patentNo|patentName|title|applicantNo|summary)\s+(?:[^"\s]+|"[^"]+")/g;
+
+        const matched = state.keyword.match(pattern);
+        const filters: QueryFilter[] = [];
+
+        if (matched && matched.length) {
+          matched.forEach((m) => {
+            const [operator, key, ...values] = m.split(' ');
+            let value = values.join(' ');
+            if (value.startsWith(`"`)) {
+              value = value.replace(`"`, '');
+            }
+
+            if (value.endsWith(`"`)) {
+              value = value.slice(0, -1);
+            }
+
+            filters.push({
+              key: key,
+              operator: operator,
+              value: value,
+            });
+          });
+        }
+
+        patentApi
+          .advancedSearch({
+            pagingRequest: state.pagingInfo,
+            searchFields: filters,
+          })
+          .pipe(delay(500))
+          .subscribe({
+            next: (result) => {
+              patchState(store, (s) => ({
+                ...s,
+                data: result.data.content,
+                pagingInfo: result.data.pagination,
+                status: StateStatus.Success,
+              }));
+            },
+          });
+      }
     },
   })),
   withHooks((store) => ({
