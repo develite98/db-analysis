@@ -4,6 +4,7 @@ import {
   Component,
   EventEmitter,
   Output,
+  computed,
   input,
 } from '@angular/core';
 import { Patent } from '@ng-lab/core';
@@ -18,6 +19,10 @@ import { Patent } from '@ng-lab/core';
 export class PatentCardComponent {
   public patent = input.required<Patent>();
   public no = input(1);
+
+  public publicDate = computed(() => {
+    return this.patent().publicationDate.replace('00:00:00', '');
+  });
 
   @Output() public titleClick = new EventEmitter();
 }

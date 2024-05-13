@@ -14,6 +14,8 @@ export interface Patent {
   ipc: string;
   description: string;
   claims: string;
+  countryCode: string;
+  author: string;
 }
 
 export const PatentFields: Field[] = [

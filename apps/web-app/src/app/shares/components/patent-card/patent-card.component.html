@@ -2,13 +2,15 @@
  <p class="font-bold mb-1 text-lg" (click)="titleClick.emit()">{{no()}}. {{patent().ipc}} <span class="ms-1 me-3 text-primary">{{ patent().patentName }}</span></p>
     
  <div class="flex items-center w-fit gap-2 mb-1 -ms-px text-base-content">
-    <span class="px-4 py-2 rounded-box bg-base-content/10"><span class="font-bold">Appl.No:</span> {{patent().applicantNo}}</span>
-    <span class="px-4 py-2 rounded-box bg-base-content/10 "><span class="font-bold">Inventor:</span> {{patent().inventorName}}</span>
+   <span class="px-3 py-2 rounded-box bg-base-content/10"><span class="font-bold">Int.Class:</span> {{patent().ipc}}</span>
+    <span class="px-3 py-2 rounded-box bg-base-content/10"><span class="font-bold">Appl.No:</span> {{patent().applicantNo}}</span>
+    <span class="px-3 py-2 rounded-box bg-base-content/10 "><span class="font-bold">Applicant:</span> {{patent().author || '--'}}</span>
+    <span class="px-3 py-2 rounded-box bg-base-content/10 "><span class="font-bold">Inventor:</span> {{patent().inventorName}}</span>
  </div>
 
  <p class="mt-4">
     {{ patent().summary }}
  </p>
 
- <p class="text-base-content/80 font-bold mt-4"> {{ patent().publicationDate }}</p>
+ <p class="text-base-content/80 font-bold mt-4">{{ patent().countryCode || '--' }} {{ publicDate() }}</p>
 </button>

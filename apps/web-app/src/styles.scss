@@ -70,3 +70,10 @@ body {
     font-size: 14px !important;
   }
 }
+
+input.input,
+button.btn,
+button.input {
+  @apply rounded;
+  border-width: 2px !important;
+}
