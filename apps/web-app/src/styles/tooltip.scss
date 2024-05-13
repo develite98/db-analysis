@@ -21,7 +21,7 @@
 .tippy-box {
   @apply text-base-content #{!important};
   @apply bg-base-100 #{!important};
-  border-radius: 12px !important;
+  border-radius: 3px !important;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1), 0 14px 28px rgba(0, 0, 0, 0.14) !important;
 }
 
@@ -72,7 +72,7 @@
   }
 
   .tippy-box {
-    border-radius: 12px !important;
+    border-radius: 6px !important;
     @apply bg-red-500 text-white text-sm #{!important};
   }
 }
