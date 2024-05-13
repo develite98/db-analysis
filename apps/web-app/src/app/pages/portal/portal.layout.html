@@ -37,7 +37,7 @@
               @for (item of menuItems(); track item) { @if
               (item.children?.length) {
               <li>
-                <a class="text-base">
+                <a class="text-base-content">
                   <span class="app-icon me-2 text-xl">{{item.icon}}</span>
                   {{item.title}}</a
                 >
@@ -54,7 +54,7 @@
               </li>
               } @else {
               <li>
-                <a class="text-base">
+                <a class="text-base-content">
                   <span class="app-icon me-2 text-xl">{{item.icon}}</span>
                   {{item.title}}</a
                 >
@@ -93,7 +93,7 @@
           @for (item of menuItems(); track item) { @if (item.children?.length) {
           <li>
             <a
-              class="text-base"
+              class="text-base-content"
               [routerLink]="item.url"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{exact: true}"
@@ -118,7 +118,7 @@
           } @else {
           <li>
             <a
-              class="text-base"
+              class="text-base-content"
               [routerLink]="item.url"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{exact: true}"

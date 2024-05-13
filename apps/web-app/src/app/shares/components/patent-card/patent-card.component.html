@@ -1,8 +1,7 @@
 <button class="w-full p-4 shadow border border-base-content/30 rounded hover:border-primary focus:border-primary text-start !outline-none">
  <p class="font-bold mb-1 text-lg" (click)="titleClick.emit()">{{no()}}. {{patent().ipc}} <span class="ms-1 me-3 text-primary">{{ patent().patentName }}</span></p>
     
- <div class="flex items-center w-fit gap-2 mb-1 -ms-px text-base
- ">
+ <div class="flex items-center w-fit gap-2 mb-1 -ms-px text-base-content">
     <span class="px-4 py-2 rounded-box bg-base-content/10"><span class="font-bold">Appl.No:</span> {{patent().applicantNo}}</span>
     <span class="px-4 py-2 rounded-box bg-base-content/10 "><span class="font-bold">Inventor:</span> {{patent().inventorName}}</span>
  </div>

@@ -16,7 +16,7 @@
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  color: #0b2a43;
+  @apply text-base-content;
   font-family: Helvetica Neue, arial, sans-serif;
 }
 
