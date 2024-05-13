@@ -18,7 +18,7 @@ module.exports = {
       {
         light: {
           ...require('daisyui/src/theming/themes')['light'],
-          primary: '#505ac9',
+          primary: '#0747A6',
           'primary-content': '#ffffff',
           'error-content': '#ffffff',
           orange: '#FFA500',
@@ -29,7 +29,7 @@ module.exports = {
       {
         dark: {
           ...require('daisyui/src/theming/themes')['dark'],
-          primary: '#7b83eb',
+          primary: '#0747A6',
           'primary-content': '#ffffff',
           'error-content': '#ffffff',
           orange: '#FFA500',
@@ -38,7 +38,7 @@ module.exports = {
       {
         dracula: {
           ...require('daisyui/src/theming/themes')['dracula'],
-          primary: '#7b83eb',
+          primary: '#0747A6',
           'primary-content': '#ffffff',
           'error-content': '#ffffff',
           orange: '#FFA500',
@@ -47,7 +47,7 @@ module.exports = {
       {
         lemonade: {
           ...require('daisyui/src/theming/themes')['lemonade'],
-          primary: '#7b83eb',
+          primary: '#0747A6',
           'primary-content': '#ffffff',
           orange: '#FFA500',
         },

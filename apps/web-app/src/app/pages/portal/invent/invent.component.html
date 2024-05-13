@@ -7,10 +7,10 @@
     <div class="w-full mt-4 border-b pb-2 mb-2 border-base-content/10">
       <div class="flex gap-2">
         @if (!patentStore.isAdvancedMode()) {
-        <div class="join">
+        <div class="flex items-center gap-2">
           <button
             #tooltip="tippy"
-            class="input input-bordered join-item !outline-none truncate flex items-center gap-2"
+            class="input input-bordered focus:border-primary join-item !outline-none truncate flex items-center gap-2"
             (click)="$event.preventDefault(); tooltip.show()"
             [tp]="selectTpl"
             [tpOffset]="[-5, -5]"
@@ -42,7 +42,7 @@
           >
 
           <input
-            class="input input-bordered !outline-none min-w-[500px] join-item"
+            class="input input-bordered focus:border-primary transition-all !outline-none min-w-[500px] join-item"
             [ngModel]="patentStore.keyword()"
             (ngModelChange)="patentStore.changeSearchText($event)"
             placeholder="Từ khóa tìm kiếm.."

@@ -1,5 +1,4 @@
-<label
-  class="input input-bordered flex items-center gap-2 w-full !outline-none"
+<label class="relative"
   #tooltip="tippy"
   [tp]="selectTpl"
   [tpUseHostWidth]="true"
@@ -11,7 +10,7 @@
   <input
     #input
     [(ngModel)]="searchText"
-    class="grow min-w-[600px]"
+    class="input input-bordered focus:border-primary flex items-center gap-2 w-full !outline-none min-w-[600px] pr-8"
     placeholder="Tìm kiếm..."
     (keydown.ArrowDown)="moveNext($event)"
     (keydown.ArrowUp)="movePrevious($event)"
@@ -20,7 +19,7 @@
     (keydown.escape)="tooltip.hide()"
   />
 
-  <span class="app-icon" data-tooltip="Help query ?">help</span>
+  <span class="app-icon absolute top-1/2 -translate-y-1/2 right-4" data-tooltip="Help query ?">help</span>
 
   <ng-template #selectTpl let-hide>
     <div class="select-popup-container">
