@@ -60,6 +60,7 @@
         <li>
           <a
             [class.active]="activeIndex === i"
+            (mouseenter)="activeIndex = i"
             (click)="activeIndex = i; add(); tooltip.show(); input.focus()"
           >
             @if (step === ACTION.Field) {

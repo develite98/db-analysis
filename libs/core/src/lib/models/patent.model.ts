@@ -20,34 +20,48 @@ export interface Patent {
 
 export const PatentFields: Field[] = [
   {
-    value: 'patentCode',
+    value: 'PatentCode',
     label: 'Patent Code',
+    key: 'patent_code',
   },
   {
-    value: 'patentNo',
+    value: 'PatentNo',
     label: 'Patent No',
+    key: 'patent_no',
   },
   {
-    value: 'patentName',
+    value: 'PatentName',
     label: 'Patent Name',
+    key: 'patent_name',
   },
   {
-    value: 'title',
+    value: 'Title',
     label: 'Title',
+    key: 'title',
   },
   {
-    value: 'applicantNo',
+    value: 'ApplicantNo',
     label: 'Applicant No',
+    key: 'application_no',
   },
   {
-    value: 'summary',
+    value: 'Summary',
     label: 'Summary',
+    key: 'summary ',
   },
 ];
 
 export const PatentFieldLabelDict: Record<string, string> = PatentFields.reduce(
   (a, b) => {
     a[b.value] = b.label;
+    return a;
+  },
+  {} as Record<string, string>
+);
+
+export const PatentFieldKeyDict: Record<string, string> = PatentFields.reduce(
+  (a, b) => {
+    a[b.value] = b.key;
     return a;
   },
   {} as Record<string, string>

@@ -14,7 +14,7 @@
             (click)="$event.preventDefault(); tooltip.show()"
             [tp]="selectTpl"
             [tpOffset]="[-5, -5]"
-            [tpUseHostWidth]="true" 
+            [tpUseHostWidth]="true"
             tpVariation="popper"
             tpPlacement="bottom"
           >
@@ -102,30 +102,36 @@
       <div class="grow flex flex-col overflow-auto">
         <div class="flex flex-col grow overflow-auto gap-3 pb-1">
           @if (patentStore.isLoading()) {
-          <div class="skeleton rounded-lg h-22 w-3/4"></div>
-          <div class="skeleton rounded-lg h-22 w-1/2"></div>
           <div class="skeleton rounded-lg h-20 w-3/4"></div>
           <div class="skeleton rounded-lg h-16 w-1/2"></div>
-          <div class="skeleton h-8 w-1/4"></div>
-          <div class="skeleton h-4 w-1/5"></div>
-          } @if (patentStore.isSuccess()) { @for (item of patentStore.data();
-          track item; let i = $index) {
-          <app-patent-card
-            [patent]="item"
-            [no]="i + 1"
-            (titleClick)="goDetail(item)"
-          ></app-patent-card>
-          } @empty {
-            <div class="text-center h-full flex items-center justify-center flex-col">
-              <button type="button" class="relative block rounded-lg border-2 border-dashed border-base-content/20 p-12 text-center  focus:outline-none ">
-                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6" />
-                </svg>
-                <h3 class="mt-2 text-xl font-semibold text-base-content">Không có dữ liệu</h3>
-                <p class="mt-1 text-base text-base-content/50">Hãy thử với bộ lọc khác.</p>
-              </button>
-            </div>
-          } }
+          <div class="skeleton rounded-lg h-8 w-1/4"></div>
+          <div class="skeleton rounded-lg h-4 w-1/5"></div>
+          }
+          
+          @if (patentStore.isSuccess()) {
+            @for (item of patentStore.data(); track item; let i = $index) {
+            <app-patent-card
+              [patent]="item"
+              [no]="i + 1"
+              (titleClick)="goDetail(item)"
+            ></app-patent-card>
+            } @empty {
+              <div role="alert" class="alert rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div>
+                  <h3 class="font-bold">Không có dữ liệu!</h3>
+                  <div class="text-xs">Vui lòng kiểm tra lại bộ lọc</div>
+                </div>
+              </div>
+            }
+          } @else if (patentStore.error()) {
+            <span>
+              <div role="alert" class="alert alert-error rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Có lỗi xảy ra, vui lòng kiểm tra lại bộ lọc.</span>
+              </div>
+            </span>
+          }
         </div>
 
         <div class="mt-auto flex items-center gap-2 mb-2 pt-1">

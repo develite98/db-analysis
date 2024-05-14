@@ -8,7 +8,7 @@ import {
 } from '@ng-lab/ui-controls';
 import { FilterItemComponent } from '../../../shares/components/filter-item/filter-item.component';
 import { PatentCardComponent } from '../../../shares/components/patent-card/patent-card.component';
-import { PatentStore } from '../../../shares/stores/patent.store';
+import { Mode, PatentStore } from '../../../shares/stores/patent.store';
 import { TippyDirective } from '@ngneat/helipopper';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Patent } from '@ng-lab/core';
@@ -40,5 +40,12 @@ export class InventComponent {
       relativeTo: this.activeRoute.parent,
       queryParams: { patentCode: patent.patentCode },
     });
+  }
+
+  constructor() {
+    const mode = this.activeRoute.snapshot.queryParams?.['mode'];
+    if (mode && mode === 'advanced') {
+      this.patentStore.toggleMode(Mode.Advanced);
+    }
   }
 }

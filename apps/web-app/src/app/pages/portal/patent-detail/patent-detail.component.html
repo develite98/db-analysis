@@ -95,16 +95,12 @@
             @if (isLoading()) {
             <div class="skeleton h-8 w-96 rounded-lg"></div>
             } @else {
-            <div class="flex items-center w-fit gap-2 mb-1 -ms-px text-base">
-              <span class="px-3 py-1 rounded-box bg-success/20"
-                ><span class="font-bold">Appl.No:</span>
-                {{ patent()?.applicantNo }}</span
-              >
-              <span class="px-3 py-1 rounded-box bg-info/20"
-                ><span class="font-bold">Inventor:</span>
-                {{ patent()?.inventorName }}</span
-              >
-            </div>
+              <div class="flex items-center w-fit gap-2 -ms-px text-base-content">
+                <span class="''"><span class="font-bold">Int.Class:</span> {{patent()?.ipc || '--'}}</span>
+                 <span class="''"><span class="font-bold">Appl.No:</span> {{patent()?.applicantNo || '--'}}</span>
+                 <span class="'' "><span class="font-bold">Applicant:</span> {{patent()?.author  || '--'}}</span>
+                 <span class="'' "><span class="font-bold">Inventor:</span> {{patent()?.inventorName || '--'}}</span>
+              </div>
             }
           </dd>
         </div>

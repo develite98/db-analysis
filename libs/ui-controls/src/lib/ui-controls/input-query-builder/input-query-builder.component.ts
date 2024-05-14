@@ -35,7 +35,7 @@ export enum Action {
 })
 export class InputQueryBuilderComponent {
   public pattern =
-    /(AND|OR|XOR)\s+(patentCode|patentNo|patentName|title|applicantNo|summary):\(.+?\)/g;
+    /(AND|OR|XOR)\s+(PatentCode|PatentNo|PatentName|Title|ApplicantNo|Summary):\(.+?\)/g;
 
   public fieldLabelDict = PatentFieldLabelDict;
   public showAutocomplete = signal(false);

@@ -4,6 +4,7 @@ import {
   Pagination,
   Patent,
   PatentApiService,
+  PatentFieldKeyDict,
   PatentFields,
   QueryFilter,
   StateStatus,
@@ -20,7 +21,7 @@ import {
 } from '@ngrx/signals';
 import { delay } from 'rxjs';
 
-enum Mode {
+export enum Mode {
   Advanced = 'advanced',
   Simple = 'simple',
 }
@@ -86,10 +87,15 @@ export const PatentStore = signalStore(
     changeField: (field: Field) => {
       patchState(store, (s) => ({ ...s, selectedField: field }));
     },
-    toggleMode: () => {
-      const state = getState(store);
-      const newMode =
-        state.mode === Mode.Advanced ? Mode.Simple : Mode.Advanced;
+
+    toggleMode: (mode?: Mode) => {
+      let newMode = Mode.Simple;
+      if (mode) {
+        newMode = mode;
+      } else {
+        const state = getState(store);
+        newMode = state.mode === Mode.Advanced ? Mode.Simple : Mode.Advanced;
+      }
 
       patchState(store, (s) => ({
         ...s,
@@ -121,6 +127,12 @@ export const PatentStore = signalStore(
                 status: StateStatus.Success,
               }));
             },
+            error: () => {
+              patchState(store, (s) => ({
+                ...s,
+                status: StateStatus.Error,
+              }));
+            },
           });
       } else {
         patentApi
@@ -136,6 +148,12 @@ export const PatentStore = signalStore(
                 data: result.data.content,
                 pagingInfo: result.data.pagination,
                 status: StateStatus.Success,
+              }));
+            },
+            error: () => {
+              patchState(store, (s) => ({
+                ...s,
+                status: StateStatus.Error,
               }));
             },
           });
@@ -156,7 +174,7 @@ const convertToQueryFilter = (input: string): QueryFilter[] => {
 
   for (const match of matches) {
     const [, operator, key, value] = match;
-    result.push({ operator, key, value });
+    result.push({ operator, key: PatentFieldKeyDict[key], value });
   }
 
   return result;
