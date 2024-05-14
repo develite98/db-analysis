@@ -101,15 +101,13 @@ export const PatentStore = signalStore(
         ];
 
         const currentText = searchFields[0].value;
-        const keyword = currentText?.includes(' ')
-          ? `"${currentText.trim()}"`
-          : currentText;
+        const keyword = `(${currentText.trim()}`;
 
         patchState(store, (s) => ({
           ...s,
           mode: newMode,
           searchFields: searchFields,
-          keyword: `${searchFields[0].operator} ${searchFields[0].key} ${keyword}`,
+          keyword: `${searchFields[0].operator} ${searchFields[0].key}:${keyword}`,
         }));
       } else {
         patchState(store, (s) => ({
@@ -145,36 +143,10 @@ export const PatentStore = signalStore(
             },
           });
       } else {
-        const pattern =
-          /(AND|OR|XOR)\s+(patentCode|patentNo|patentName|title|applicantNo|summary)\s+(?:[^"\s]+|"[^"]+")/g;
-
-        const matched = state.keyword.match(pattern);
-        const filters: QueryFilter[] = [];
-
-        if (matched && matched.length) {
-          matched.forEach((m) => {
-            const [operator, key, ...values] = m.split(' ');
-            let value = values.join(' ');
-            if (value.startsWith(`"`)) {
-              value = value.replace(`"`, '');
-            }
-
-            if (value.endsWith(`"`)) {
-              value = value.slice(0, -1);
-            }
-
-            filters.push({
-              key: key,
-              operator: operator,
-              value: value,
-            });
-          });
-        }
-
         patentApi
           .advancedSearch({
             pagingRequest: state.pagingInfo,
-            searchFields: filters,
+            searchFields: convertToQueryFilter(state.keyword),
           })
           .pipe(delay(500))
           .subscribe({
@@ -196,3 +168,16 @@ export const PatentStore = signalStore(
     },
   }))
 );
+
+const convertToQueryFilter = (input: string): QueryFilter[] => {
+  const regex = /(AND|OR|XOR)\s+([^\s:]+):\(([^)]+)\)/g;
+  const matches = input.matchAll(regex);
+  const result: QueryFilter[] = [];
+
+  for (const match of matches) {
+    const [, operator, key, value] = match;
+    result.push({ operator, key, value });
+  }
+
+  return result;
+};

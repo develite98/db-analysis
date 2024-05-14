@@ -9,7 +9,12 @@ import {
   signal,
 } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AllExpressions, PatentFields, QueryFilter } from '@ng-lab/core';
+import {
+  AllExpressions,
+  PatentFieldLabelDict,
+  PatentFields,
+  QueryFilter,
+} from '@ng-lab/core';
 import { TippyDirective } from '@ngneat/helipopper';
 import { startWith } from 'rxjs';
 
@@ -30,13 +35,15 @@ export enum Action {
 })
 export class InputQueryBuilderComponent {
   public pattern =
-    /(AND|OR|XOR)\s+(patentCode|patentNo|patentName|title|applicantNo|summary)\s+(?:[^"\s]+|"[^"]+")/g;
+    /(AND|OR|XOR)\s+(patentCode|patentNo|patentName|title|applicantNo|summary):\(.+?\)/g;
 
+  public fieldLabelDict = PatentFieldLabelDict;
   public showAutocomplete = signal(false);
   public searchText = model('');
   public filteredOptions = signal<string[]>([]);
   public activeIndex = 0;
   public step: Action = Action.Field;
+  public matchCount = 0;
   public ACTION = Action;
   public dict = {
     0: {
@@ -71,7 +78,6 @@ export class InputQueryBuilderComponent {
         }
 
         const isMatchAndFull = matched && matched.length > 0 && !text;
-
         const words = (
           text === ' ' || (text.startsWith(' ') && text.length >= 2)
             ? text.replace(' ', '')
@@ -88,16 +94,24 @@ export class InputQueryBuilderComponent {
   public processOptions(values: string[], isMatchAndFull: boolean | null) {
     const length = values.length;
 
-    if (length >= 3 || isMatchAndFull) {
-      this.step = Action.Value;
-      const [operator, key, ...value] = values;
-      this.filteredOptions.set(
-        this.dict[2].options.filter((o) => o.includes(value.join(' ')))
-      );
-      return;
+    if (length >= 2) {
+      if (values.some((v) => v.includes(':('))) {
+        this.step = Action.Value;
+        const [operator, key, ...value] = values;
+        this.filteredOptions.set(
+          this.dict[2].options.filter((o) => o.includes(value.join(' ')))
+        );
+        return;
+      } else {
+        this.step = Action.Field;
+        this.filteredOptions.set(
+          this.dict[1].options.filter((o) => o.includes(values[1]))
+        );
+        return;
+      }
     }
 
-    this.step = Action.Field;
+    this.step = Action.Operator;
     if (length === 0) {
       this.filteredOptions.set(this.dict[0].options);
       return;
@@ -120,21 +134,62 @@ export class InputQueryBuilderComponent {
   }
 
   public add() {
-    const words = ((this.searchText() as string) || '').split(' ') || [];
-    const optionToInSearch = this.filteredOptions()[this.activeIndex];
-    const latestWords = words[words.length - 1];
-    if (!latestWords) {
-      words.push(optionToInSearch);
-    } else {
-      words[words.length - 1] = optionToInSearch;
+    const optionToInsert = this.filteredOptions()[this.activeIndex];
+    const value = this.searchText();
+    let text = value;
+    const matched = value.match(this.pattern);
+    text = value.replace(this.pattern, '');
+
+    if (matched) {
+      for (let i = 0; i < matched?.length - 1; i++) {
+        text = text.replace(' ', '');
+      }
     }
 
-    const word = words
-      .filter(Boolean)
-      .reduce((a, b) => `${a} ${b}`, '')
-      .trim();
+    if (this.step === Action.Operator) {
+      if (matched && matched.length) {
+        text = ` ${optionToInsert}`;
+        text += ' ';
+      } else {
+        text = optionToInsert;
+        text += ' ';
+      }
+    }
 
-    this.searchText.update(() => word + ' ');
+    if (this.step === Action.Field) {
+      const pattern = /^\s*(\S+)/;
+      const match = text.match(pattern);
+      const operator = match ? match[1] : '';
+      text = `${
+        matched && matched.length ? ' ' : ''
+      }${operator} ${optionToInsert}`;
+      // if (replacementChar) {
+      //   text = text.replace(optionToInSearch, replacementChar);
+      // } else {
+      //   if (text.endsWith(' ')) {
+      //     text += optionToInSearch;
+      //   } else {
+      //     text += ' ' + optionToInSearch;
+      //   }
+      // }
+
+      text += ':(';
+    }
+    // const words = ((this.searchText() as string) || '').split(' ') || [];
+    // const optionToInSearch = this.filteredOptions()[this.activeIndex];
+    // const latestWords = words[words.length - 1];
+    // if (!latestWords) {
+    //   words.push(optionToInSearch);
+    // } else {
+    //   words[words.length - 1] = optionToInSearch;
+    // }
+    // const word = words
+    //   .filter(Boolean)
+    //   .reduce((a, b) => `${a} ${b}`, '')
+    //   .trim();
+
+    const word = (matched?.join(' ') || '') + text;
+    this.searchText.update(() => word + '');
   }
 
   public moveNext(event: Event) {

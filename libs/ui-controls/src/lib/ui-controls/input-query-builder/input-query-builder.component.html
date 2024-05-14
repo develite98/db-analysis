@@ -25,7 +25,7 @@
   <ng-template #selectTpl let-hide>
     <div class="select-popup-container">
       <div class="pt-2 px-4 font-bold">
-        @if (step === ACTION.Field) {
+        @if (step === ACTION.Operator) {
         <span class="flex items-center gap-2">
           <span class="step-item active">1</span>
           <span>Chọn điều kiện</span>
@@ -34,7 +34,7 @@
           -
           <span class="step-item">3</span>
         </span>
-        } @else if (step === ACTION.Operator) {
+        } @else if (step === ACTION.Field) {
         <span class="flex items-center gap-2">
           <span class="step-item">1</span>
           -
@@ -50,7 +50,7 @@
           <span class="step-item">2</span>
           -
           <span class="step-item active">3</span>
-          <span>Nhập từ khóa hoặc chọn gợi ý</span>
+          <span>Nhập từ khóa tìm kiếm</span>
         </span>
         }
       </div>
@@ -62,7 +62,11 @@
             [class.active]="activeIndex === i"
             (click)="activeIndex = i; add(); tooltip.show(); input.focus()"
           >
-            {{ option }}
+            @if (step === ACTION.Field) {
+              {{ fieldLabelDict[option] }}
+            } @else {
+              {{ option }}
+            }
           </a>
         </li>
         } @empty {
