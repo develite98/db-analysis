@@ -91,31 +91,11 @@ export const PatentStore = signalStore(
       const newMode =
         state.mode === Mode.Advanced ? Mode.Simple : Mode.Advanced;
 
-      if (newMode === Mode.Advanced) {
-        const searchFields: QueryFilter[] = [
-          {
-            value: state.keyword,
-            operator: 'AND',
-            key: state.selectedField.value,
-          },
-        ];
-
-        const currentText = searchFields[0].value;
-        const keyword = `(${currentText.trim()}`;
-
-        patchState(store, (s) => ({
-          ...s,
-          mode: newMode,
-          searchFields: searchFields,
-          keyword: `${searchFields[0].operator} ${searchFields[0].key}:${keyword}`,
-        }));
-      } else {
-        patchState(store, (s) => ({
-          ...s,
-          mode: newMode,
-          keyword: '',
-        }));
-      }
+      patchState(store, (s) => ({
+        ...s,
+        mode: newMode,
+        keyword: ``,
+      }));
     },
     simpleSearch: () => {
       const state = getState(store);
